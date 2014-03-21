@@ -1,20 +1,37 @@
+/*
+	Character base class for use with Mortal Komabat.
+	
+*/
+
+#ifndef Package_H
+#define Package_H
+
 #include <iostream>
 
 using namespace std;
 
 class Character {
 	public:
-		Character(int = 2);
-		void HighKick();
-		void LowKick();
-		void HighPunch();
-		void LowPunch();
-		void Block();
-		void Jump();
-		void MoveLeft();
-		void MoveRight();
-		void SpecialAttack();		
+		Character(string n, int x, int y, double h, double w, double a, double l);
+		void moveRight();
+		void moveLeft();
+		void highKick();
+		void lowKick();
+		void highPunch();
+		void lowPunch();
+		void block();
+		void jump();		
+		void specialAttack();		
 
 	protected:
-		int height;
+		string name;
+		int posx;
+		int posy;
+		double height;
+		double weight;
+		double armreach;
+		double legreach;
+		
 };
+
+#endif
