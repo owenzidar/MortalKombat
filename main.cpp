@@ -8,9 +8,14 @@ The two characters can move independently and punch and kick each other to deple
 #include <iostream>
 #include "SDL/SDL.h"
 #include "SDL/SDL_ttf.h"
-#include "blob.h"
 #include <string>
 #include <sstream>
+
+#include "Timer.h"
+#include "Character.h"
+#include "CharlesBarkley.h"
+#include "Conan.h"
+#include "Lebron.h"
 
 using namespace std;
 
@@ -49,8 +54,8 @@ int main(int argc, char* args[]){
 
 	Timer fps; //Instantiate a timer to help slow down movements of characters for easier gameplay
 
-	Blob myDot1(400,600, 1); //Initialize character 1
-	Blob myDot2(800,600, 0); //Inititalize character 2
+	CharlesBarkley myDot1(400,600, 1); //Initialize character 1
+	Conan myDot2(800,600, 0); //Inititalize character 2	
 
 	//Clip the sprite sheet for each character standing
 	myDot1.clipStand();
