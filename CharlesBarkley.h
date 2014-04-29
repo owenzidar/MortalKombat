@@ -14,7 +14,7 @@ using namespace std;
 
 class CharlesBarkley : public Character{
 	public:
-		CharlesBarkley(int, int, int);
+		CharlesBarkley(int = 400, int = 600, int = 1);
 		virtual void clipStand(); //Clip the sprite sheet for the character to stand
 		virtual void clipWalk(); //Clip the sprite sheet for the character to walk
 		virtual void clipPunch(); //Clip the sprite sheet for the character to punch
@@ -38,9 +38,7 @@ class CharlesBarkley : public Character{
 		SDL_Rect deadLeft[7]; //Sprite clippings for dying facing left
 };
 
-CharlesBarkley::CharlesBarkley(int xcoord, int ycoord, int walk) : Character(xcoord, ycoord, walk){
-	image = load_image("CharlesBarkley.png"); //Load image of the dot
-}
+CharlesBarkley::CharlesBarkley(int xcoord, int ycoord, int walk) : Character(xcoord, ycoord, walk){}
 
 //Clip the sprites for the character to stand, facing either right or left
 void CharlesBarkley::clipStand(){
