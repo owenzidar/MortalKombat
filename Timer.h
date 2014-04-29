@@ -18,6 +18,7 @@ const int screen_width = 1200;
 const int screen_bpp = 32;
 
 SDL_Surface *background; //Background image, a Mortal Kombat landscape
+SDL_Surface *winBackground;
 SDL_Surface *screen; //The blank screen
 
 SDL_Event event; //Used to check what events happen at the keyboard
@@ -31,15 +32,12 @@ SDL_Surface *load_image(string filename){
 	
 	loaded = IMG_Load(filename.c_str()); //Load the image
 
-	optimized = SDL_DisplayFormat(loaded); //Optimize the image
-	SDL_FreeSurface(loaded); //Free the loaded image to avoid memory leak
-
 	//Change the background color for the loaded image so it doesn't show up
-	Uint32 colorkey = SDL_MapRGB( optimized->format, 214, 214, 214 );
-	SDL_SetColorKey( optimized, SDL_SRCCOLORKEY, colorkey );
+	Uint32 colorkey = SDL_MapRGB( loaded->format, 214, 214, 214 );
+	SDL_SetColorKey( loaded, SDL_SRCCOLORKEY, colorkey );
 
-	//Return optimized image
-	return optimized;
+	//Return the image
+	return loaded; 
 }
 
 //Apply a loaded image to the screen at a certain place
