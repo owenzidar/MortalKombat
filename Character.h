@@ -25,25 +25,26 @@ using namespace std;
 
 class Character{
 	public:
-		Character(int = 400, int = 450, int = 1); //Constructor
-		void input1(Character &); //Make the desired move according to key pressed (Character 1)
-		void input2(Character &); //Make the desired move according to key pressed (Character 2)
-		void move1(Character &); //Move the character
-		void move2(Character &); //Move the character	
+		Character(int = 400, int = 600, int = 1); //Constructor
+		void input1(Character*); //Make the desired move according to key pressed (Character 1)
+		void input2(Character*); //Make the desired move according to key pressed (Character 2)
+		void move1(Character*); //Move the character
+		void move2(Character*); //Move the character	
 		virtual void show(SDL_Surface*) = 0; //Show the character on desired surface
 		void free(); //Free the character's space in memory
 		void show_health(int, int); //Display the current character's health bar using FillRect
-		void punch(Character &); //Punch the opposing character, if close enough
-		void kick(Character &); //Kick the opposing character, if close enough
+		void punch(Character*); //Punch the opposing character, if close enough
+		void kick(Character*); //Kick the opposing character, if close enough
 		int isDone(); //Check to see if the game is over
-		virtual void clipStand() = 0; //Clip the sprite sheet for the character to stand
-		virtual void clipWalk() = 0; //Clip the sprite sheet for the character to walk
-		virtual void clipPunch() = 0; //Clip the sprite sheet for the character to punch
-		virtual void clipKick() = 0; //Clip the sprite sheet for the character to kick
-		virtual void clipBlock() = 0; //Clip the sprite sheet for the character to block
-		virtual void clipDeath() = 0; //Clip the sprite sheet for the character to die
+		virtual void clipStand(); //Clip the sprite sheet for the character to stand
+		virtual void clipWalk(); //Clip the sprite sheet for the character to walk
+		virtual void clipPunch(); //Clip the sprite sheet for the character to punch
+		virtual void clipKick(); //Clip the sprite sheet for the character to kick
+		virtual void clipBlock(); //Clip the sprite sheet for the character to block
+		virtual void clipDeath(); //Clip the sprite sheet for the character to die
 		void setStatus(int); //Set the status of the character
 		void setFrame(int); //Set the current frame for animation
+		void setImage(string);
 
 	protected:
 		int x; //x-coordinate
@@ -89,7 +90,7 @@ Character::Character(int xcoord, int ycoord, int walk){
 }
 
 //Make a desired move for Character 1
-void Character::input1(Character &otherDot){
+void Character::input1(Character *otherDot){
 	//If key was pressed and no other keys are currently pressed
 	if(event.type == SDL_KEYDOWN && (pressed1 == 0) && (pressed2 == 0) && (pressed3 == 0) && (pressed4 == 0) && (pressed5 == 0)){ 
 		switch(event.key.keysym.sym){
@@ -154,7 +155,7 @@ void Character::input1(Character &otherDot){
 }
 
 //Make a desired move for Character 2
-void Character::input2(Character &otherDot){
+void Character::input2(Character *otherDot){
 	//If key was pressed and no other keys are currently pressed
 	if(event.type == SDL_KEYDOWN && (pressed1 == 0) && (pressed2 == 0) && (pressed3 == 0) && (pressed4 == 0) && (pressed5 == 0)){ 
 		switch(event.key.keysym.sym){
@@ -219,11 +220,11 @@ void Character::input2(Character &otherDot){
 }
 
 //Move character 1 based on its velocity
-void Character::move1(Character &otherDot){
+void Character::move1(Character *otherDot){
 	//If moving to the right
 	if(xVel > 0){
 		//If within screen boundary and not colliding with other player
-		if(x <= screen_width - 100 && x <= (otherDot.x - 80)){
+		if(x <= screen_width - 100 && x <= (otherDot->x - 80)){
 			x +=xVel; //Move character's position
 		}
 	}
@@ -238,7 +239,7 @@ void Character::move1(Character &otherDot){
 }	
 
 //Move character 2 based on its velocity
-void Character::move2(Character &otherDot){
+void Character::move2(Character *otherDot){
 	//If moving to the right
 	if(xVel > 0){
 		//If within screen boundary
@@ -250,7 +251,7 @@ void Character::move2(Character &otherDot){
 	//If moving left
 	if(xVel < 0){
 		//If within screen boundary and not colliding with other player
-		if(x >= 0 && x >= (otherDot.x + 80)){
+		if(x >= 0 && x >= (otherDot->x + 80)){
 			x += xVel; //Move character's position
 		}
 	}
@@ -271,32 +272,32 @@ void Character::show_health(int x, int y){
 }
 
 //Punch the other character and deplete their health if no more than 100 pixels away
-void Character::punch(Character &otherDot){
+void Character::punch(Character *otherDot){
 	//If facing right
 	if(walkWay == 1){
 		//If other dot within 100 pixels to the right and is not blocking left
-		if((x >= (otherDot.x - 100)) && (x <= (otherDot.x)) && (otherDot.block == 0 || otherDot.walkWay == walkWay)){ 
+		if((x >= (otherDot->x - 100)) && (x <= (otherDot->x)) && (otherDot->block == 0 || otherDot->walkWay == walkWay)){ 
 											    	  
-			if(otherDot.health > 0){ //If the other character still has health left
+			if(otherDot->health > 0){ //If the other character still has health left
 	
-				if(otherDot.health <= 3){ //If the other character cannot take a full punch
-					otherDot.health = 0; //Set other character's health to 0
+				if(otherDot->health <= 3){ //If the other character cannot take a full punch
+					otherDot->health = 0; //Set other character's health to 0
 				}else{ //Other character can take a full punch
-					otherDot.health = otherDot.health - 3; //Take 3 health away from other character
+					otherDot->health = otherDot->health - 3; //Take 3 health away from other character
 				}
 			}
 		}
 	//If facing left
 	}else{
 		//If other dot within 100 pixels to the left and is not blocking right
-		if((x >= (otherDot.x)) && (x <= (otherDot.x + 100)) && (otherDot.block == 0 || otherDot.walkWay == walkWay)){ 
+		if((x >= (otherDot->x)) && (x <= (otherDot->x + 100)) && (otherDot->block == 0 || otherDot->walkWay == walkWay)){ 
 											    	   
-			if(otherDot.health > 0){ //If the other character still has health left
+			if(otherDot->health > 0){ //If the other character still has health left
 	
-				if(otherDot.health <= 3){ //If the other character cannot take a full punch
-					otherDot.health = 0; //Set other character's health to 0
+				if(otherDot->health <= 3){ //If the other character cannot take a full punch
+					otherDot->health = 0; //Set other character's health to 0
 				}else{ //Other character can take a full punch
-					otherDot.health = otherDot.health - 3; //Take 3 health away from other character
+					otherDot->health = otherDot->health - 3; //Take 3 health away from other character
 				}
 			}
 		}
@@ -304,32 +305,32 @@ void Character::punch(Character &otherDot){
 }
 
 //Kick the other character and deplete their health if no more than 100 pixels away
-void Character::kick(Character &otherDot){
+void Character::kick(Character *otherDot){
 	//If facing right
 	if(walkWay == 1){
 		//If other dot within 100 pixels to the right and is not blocking left
-		if((x >= (otherDot.x - 100)) && (x <= (otherDot.x)) && (otherDot.block == 0 || otherDot.walkWay == walkWay)){ 
+		if((x >= (otherDot->x - 100)) && (x <= (otherDot->x)) && (otherDot->block == 0 || otherDot->walkWay == walkWay)){ 
 											    	  
-			if(otherDot.health > 0){ //If the other character still has health left
+			if(otherDot->health > 0){ //If the other character still has health left
 	
-				if(otherDot.health <= 5){ //If the other character cannot take a full kick
-					otherDot.health = 0; //Set other character's health to 0
+				if(otherDot->health <= 5){ //If the other character cannot take a full kick
+					otherDot->health = 0; //Set other character's health to 0
 				}else{ //Other character can take a full kick
-					otherDot.health = otherDot.health - 5; //Take 5 health away from other character
+					otherDot->health = otherDot->health - 5; //Take 5 health away from other character
 				}
 			}
 		}
 	//If facing left
 	}else{
 		//If other dot within 100 pixels to the left and is not blocking right
-		if((x >= (otherDot.x)) && (x <= (otherDot.x + 100)) && (otherDot.block == 0 || otherDot.walkWay == walkWay)){ 
+		if((x >= (otherDot->x)) && (x <= (otherDot->x + 100)) && (otherDot->block == 0 || otherDot->walkWay == walkWay)){ 
 											    	   
-			if(otherDot.health > 0){ //If the other character still has health left
+			if(otherDot->health > 0){ //If the other character still has health left
 	
-				if(otherDot.health <= 5){ //If the other character cannot take a full kick
-					otherDot.health = 0; //Set other character's health to 0
+				if(otherDot->health <= 5){ //If the other character cannot take a full kick
+					otherDot->health = 0; //Set other character's health to 0
 				}else{ //Other character can take a full kick
-					otherDot.health = otherDot.health - 5; //Take 5 health away from other character
+					otherDot->health = otherDot->health - 5; //Take 5 health away from other character
 				}
 			}
 		}
@@ -358,6 +359,18 @@ int Character::isDone(){
 	}
 	return 0; //Otherwise, game is not over
 }
+
+void Character::setImage(string filename){
+	image = load_image(filename);
+}
+
+void Character::show(SDL_Surface*){}
+void Character::clipStand(){}
+void Character::clipWalk(){}
+void Character::clipPunch(){}
+void Character::clipKick(){}
+void Character::clipBlock(){}
+void Character::clipDeath(){}
 
 
 #endif
