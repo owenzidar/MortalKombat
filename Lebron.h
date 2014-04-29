@@ -14,7 +14,7 @@ using namespace std;
 
 class Lebron : public Character{
 	public:
-		Lebron(int, int, int);
+		Lebron(int = 400, int = 600, int = 1);
 		virtual void clipStand(); //Clip the sprite sheet for the character to stand
 		virtual void clipWalk(); //Clip the sprite sheet for the character to walk
 		virtual void clipPunch(); //Clip the sprite sheet for the character to punch
@@ -38,199 +38,194 @@ class Lebron : public Character{
 		SDL_Rect deadLeft[6]; //Sprite clippings for dying facing left
 };
 
-Lebron::Lebron(int xcoord, int ycoord, int walk) : Character(xcoord, ycoord, walk){
-	image = load_image("LebronJames.png"); //Load image of the dot
-}
+Lebron::Lebron(int xcoord, int ycoord, int walk) : Character(xcoord, ycoord, walk){}
 
 //Clip the sprites for the character to stand, facing either right or left
 void Lebron::clipStand(){
 	standRight[ 0 ].x = 0; 
 	standRight[ 0 ].y = 0; 
-	standRight[ 0 ].w = 78; 
-	standRight[ 0 ].h = 196;
+	standRight[ 0 ].w = 81; 
+	standRight[ 0 ].h = 200;
 
-	standRight[ 1 ].x = 78; 
+	standRight[ 1 ].x = 81; 
 	standRight[ 1 ].y = 0; 
-	standRight[ 1 ].w = 79; 
-	standRight[ 1 ].h = 196;
+	standRight[ 1 ].w = 83; 
+	standRight[ 1 ].h = 200;
 
-	standRight[ 2 ].x = 157; 
+	standRight[ 2 ].x = 164; 
 	standRight[ 2 ].y = 0; 
-	standRight[ 2 ].w = 79; 
-	standRight[ 2 ].h = 196;
+	standRight[ 2 ].w = 80; 
+	standRight[ 2 ].h = 200;
 
-	standRight[ 3 ].x = 236; 
+	standRight[ 3 ].x = 244; 
 	standRight[ 3 ].y = 0; 
-	standRight[ 3 ].w = 80; 
-	standRight[ 3 ].h = 196;
+	standRight[ 3 ].w = 83; 
+	standRight[ 3 ].h = 200;
 
-	standRight[ 4 ].x = 316; 
+	standRight[ 4 ].x = 327; 
 	standRight[ 4 ].y = 0; 
-	standRight[ 4 ].w = 86; 
-	standRight[ 4 ].h = 196;
+	standRight[ 4 ].w = 84; 
+	standRight[ 4 ].h = 200;
 
-	standRight[ 5 ].x = 402; 
+	standRight[ 5 ].x = 411; 
 	standRight[ 5 ].y = 0; 
-	standRight[ 5 ].w = 90; 
-	standRight[ 5 ].h = 196;
+	standRight[ 5 ].w = 84; 
+	standRight[ 5 ].h = 200;
 
-	standRight[ 6 ].x = 492; 
+	standRight[ 6 ].x = 495; 
 	standRight[ 6 ].y = 0; 
-	standRight[ 6 ].w = 89; 
-	standRight[ 6 ].h = 196;
+	standRight[ 6 ].w = 84; 
+	standRight[ 6 ].h = 200;
 
-	standRight[ 7 ].x = 581; 
+	standRight[ 7 ].x = 579; 
 	standRight[ 7 ].y = 0; 
-	standRight[ 7 ].w = 83; 
-	standRight[ 7 ].h = 196;
+	standRight[ 7 ].w = 81; 
+	standRight[ 7 ].h = 200;
 
-	standRight[ 8 ].x = 664; 
+	standRight[ 8 ].x = 660; 
 	standRight[ 8 ].y = 0; 
-	standRight[ 8 ].w = 76; 
-	standRight[ 8 ].h = 196;
+	standRight[ 8 ].w = 82; 
+	standRight[ 8 ].h = 200;
 
 	standLeft[ 0 ].x = 0; 
-	standLeft[ 0 ].y = 3209; 
-	standLeft[ 0 ].w = 78; 
-	standLeft[ 0 ].h = 196;
+	standLeft[ 0 ].y = 3053; 
+	standLeft[ 0 ].w = 81; 
+	standLeft[ 0 ].h = 185;
 
-	standLeft[ 1 ].x = 78; 
-	standLeft[ 1 ].y = 3209; 
-	standLeft[ 1 ].w = 79; 
-	standLeft[ 1 ].h = 196;
+	standLeft[ 1 ].x = 81; 
+	standLeft[ 1 ].y = 3053; 
+	standLeft[ 1 ].w = 83; 
+	standLeft[ 1 ].h = 185;
 
-	standLeft[ 2 ].x = 157; 
-	standLeft[ 2 ].y = 3209; 
-	standLeft[ 2 ].w = 79; 
-	standLeft[ 2 ].h = 196;
+	standLeft[ 2 ].x = 164; 
+	standLeft[ 2 ].y = 3053; 
+	standLeft[ 2 ].w = 80; 
+	standLeft[ 2 ].h = 185;
 
-	standLeft[ 3 ].x = 236; 
-	standLeft[ 3 ].y = 3209; 
-	standLeft[ 3 ].w = 80; 
-	standLeft[ 3 ].h = 196;
+	standLeft[ 3 ].x = 244; 
+	standLeft[ 3 ].y = 3053; 
+	standLeft[ 3 ].w = 83; 
+	standLeft[ 3 ].h = 185;
 
-	standLeft[ 4 ].x = 316; 
-	standLeft[ 4 ].y = 3209; 
-	standLeft[ 4 ].w = 86; 
-	standLeft[ 4 ].h = 196;
+	standLeft[ 4 ].x = 327; 
+	standLeft[ 4 ].y = 3053; 
+	standLeft[ 4 ].w = 84; 
+	standLeft[ 4 ].h = 185;
 
-	standLeft[ 5 ].x = 402; 
-	standLeft[ 5 ].y = 3209; 
-	standLeft[ 5 ].w = 90; 
-	standLeft[ 5 ].h = 196;
+	standLeft[ 5 ].x = 411; 
+	standLeft[ 5 ].y = 3053; 
+	standLeft[ 5 ].w = 84; 
+	standLeft[ 5 ].h = 185;
 
-	standLeft[ 6 ].x = 492; 
-	standLeft[ 6 ].y = 3209; 
-	standLeft[ 6 ].w = 89; 
-	standLeft[ 6 ].h = 196;
+	standLeft[ 6 ].x = 495; 
+	standLeft[ 6 ].y = 3053; 
+	standLeft[ 6 ].w = 84; 
+	standLeft[ 6 ].h = 185;
 
-	standLeft[ 7 ].x = 581; 
-	standLeft[ 7 ].y = 3209; 
-	standLeft[ 7 ].w = 83; 
-	standLeft[ 7 ].h = 196;
+	standLeft[ 7 ].x = 579; 
+	standLeft[ 7 ].y = 3053; 
+	standLeft[ 7 ].w = 81; 
+	standLeft[ 7 ].h = 185;
 
-	standLeft[ 8 ].x = 664; 
-	standLeft[ 8 ].y = 3209; 
-	standLeft[ 8 ].w = 76; 
-	standLeft[ 8 ].h = 196;
+	standLeft[ 8 ].x = 660; 
+	standLeft[ 8 ].y = 3053; 
+	standLeft[ 8 ].w = 82; 
+	standLeft[ 8 ].h = 185;
 
-	standLeft[ 9 ].x = 740; 
-	standLeft[ 9 ].y = 3209; 
-	standLeft[ 9 ].w = 78; 
-	standLeft[ 9 ].h = 196;
+
 }
 
 //Clip the sprites for the character to walk, facing either right or left
 void Lebron::clipWalk(){
 	walkRight[ 0 ].x = 0; 
-	walkRight[ 0 ].y = 196; 
+	walkRight[ 0 ].y = 200; 
 	walkRight[ 0 ].w = 83; 
-	walkRight[ 0 ].h = 196;
+	walkRight[ 0 ].h = 200;
 
 	walkRight[ 1 ].x = 83; 
-	walkRight[ 1 ].y = 196; 
-	walkRight[ 1 ].w = 73; 
-	walkRight[ 1 ].h = 196;
+	walkRight[ 1 ].y = 200; 
+	walkRight[ 1 ].w = 83; 
+	walkRight[ 1 ].h = 200;
 
-	walkRight[ 2 ].x = 156; 
-	walkRight[ 2 ].y = 196; 
-	walkRight[ 2 ].w = 73; 
-	walkRight[ 2 ].h = 196;
+	walkRight[ 2 ].x = 166; 
+	walkRight[ 2 ].y = 200; 
+	walkRight[ 2 ].w = 80; 
+	walkRight[ 2 ].h = 200;
 
-	walkRight[ 3 ].x = 229; 
-	walkRight[ 3 ].y = 196; 
-	walkRight[ 3 ].w = 72; 
-	walkRight[ 3 ].h = 196;
+	walkRight[ 3 ].x = 246; 
+	walkRight[ 3 ].y = 200; 
+	walkRight[ 3 ].w = 82; 
+	walkRight[ 3 ].h = 200;
 
-	walkRight[ 4 ].x = 301; 
-	walkRight[ 4 ].y = 196; 
-	walkRight[ 4 ].w = 73; 
-	walkRight[ 4 ].h = 196;
+	walkRight[ 4 ].x = 328; 
+	walkRight[ 4 ].y = 200; 
+	walkRight[ 4 ].w = 83; 
+	walkRight[ 4 ].h = 200;
 
-	walkRight[ 5 ].x = 374; 
-	walkRight[ 5 ].y = 196; 
-	walkRight[ 5 ].w = 73; 
-	walkRight[ 5 ].h = 196;
+	walkRight[ 5 ].x = 411; 
+	walkRight[ 5 ].y = 200; 
+	walkRight[ 5 ].w = 82; 
+	walkRight[ 5 ].h = 200;
 
-	walkRight[ 6 ].x = 447; 
-	walkRight[ 6 ].y = 196; 
-	walkRight[ 6 ].w = 73; 
-	walkRight[ 6 ].h = 196;
+	walkRight[ 6 ].x = 493; 
+	walkRight[ 6 ].y = 200; 
+	walkRight[ 6 ].w = 82; 
+	walkRight[ 6 ].h = 200;
 
-	walkRight[ 7 ].x = 520; 
-	walkRight[ 7 ].y = 196; 
-	walkRight[ 7 ].w = 87; 
-	walkRight[ 7 ].h = 196;
+	walkRight[ 7 ].x = 575; 
+	walkRight[ 7 ].y = 200; 
+	walkRight[ 7 ].w = 82; 
+	walkRight[ 7 ].h = 200;
 
-	walkRight[ 8 ].x = 607; 
-	walkRight[ 8 ].y = 196; 
-	walkRight[ 8 ].w = 87; 
-	walkRight[ 8 ].h = 196;
+	walkRight[ 8 ].x = 657; 
+	walkRight[ 8 ].y = 200; 
+	walkRight[ 8 ].w = 89; 
+	walkRight[ 8 ].h = 200;
 
 	walkLeft[ 0 ].x = 0; 
-	walkLeft[ 0 ].y = 3405; 
+	walkLeft[ 0 ].y = 3253; 
 	walkLeft[ 0 ].w = 83; 
-	walkLeft[ 0 ].h = 196;
+	walkLeft[ 0 ].h = 200;
 
 	walkLeft[ 1 ].x = 83; 
-	walkLeft[ 1 ].y = 3405; 
-	walkLeft[ 1 ].w = 73; 
-	walkLeft[ 1 ].h = 196;
+	walkLeft[ 1 ].y = 3253; 
+	walkLeft[ 1 ].w = 83; 
+	walkLeft[ 1 ].h = 200;
 
-	walkLeft[ 2 ].x = 156; 
-	walkLeft[ 2 ].y = 3405; 
-	walkLeft[ 2 ].w = 73; 
-	walkLeft[ 2 ].h = 196;
+	walkLeft[ 2 ].x = 166; 
+	walkLeft[ 2 ].y = 3253; 
+	walkLeft[ 2 ].w = 80; 
+	walkLeft[ 2 ].h = 200;
 
-	walkLeft[ 3 ].x = 229; 
-	walkLeft[ 3 ].y = 3405; 
-	walkLeft[ 3 ].w = 72; 
-	walkLeft[ 3 ].h = 196;
+	walkLeft[ 3 ].x = 246; 
+	walkLeft[ 3 ].y = 3253; 
+	walkLeft[ 3 ].w = 82; 
+	walkLeft[ 3 ].h = 200;
 
-	walkLeft[ 4 ].x = 301; 
-	walkLeft[ 4 ].y = 3405; 
-	walkLeft[ 4 ].w = 73; 
-	walkLeft[ 4 ].h = 196;
+	walkLeft[ 4 ].x = 328; 
+	walkLeft[ 4 ].y = 3253; 
+	walkLeft[ 4 ].w = 83; 
+	walkLeft[ 4 ].h = 200;
 
-	walkLeft[ 5 ].x = 374; 
-	walkLeft[ 5 ].y = 3405; 
-	walkLeft[ 5 ].w = 73; 
-	walkLeft[ 5 ].h = 196;
+	walkLeft[ 5 ].x = 411; 
+	walkLeft[ 5 ].y = 3253; 
+	walkLeft[ 5 ].w = 82; 
+	walkLeft[ 5 ].h = 200;
 
-	walkLeft[ 6 ].x = 447; 
-	walkLeft[ 6 ].y = 3405; 
-	walkLeft[ 6 ].w = 73; 
-	walkLeft[ 6 ].h = 196;
+	walkLeft[ 6 ].x = 493; 
+	walkLeft[ 6 ].y = 3253; 
+	walkLeft[ 6 ].w = 82; 
+	walkLeft[ 6 ].h = 200;
 
-	walkLeft[ 7 ].x = 520; 
-	walkLeft[ 7 ].y = 3405; 
-	walkLeft[ 7 ].w = 87; 
-	walkLeft[ 7 ].h = 196;
+	walkLeft[ 7 ].x = 575; 
+	walkLeft[ 7 ].y = 3253; 
+	walkLeft[ 7 ].w = 82; 
+	walkLeft[ 7 ].h = 200;
 
-	walkLeft[ 8 ].x = 607; 
-	walkLeft[ 8 ].y = 3405; 
-	walkLeft[ 8 ].w = 87; 
-	walkLeft[ 8 ].h = 196;
+	walkLeft[ 8 ].x = 657; 
+	walkLeft[ 8 ].y = 3253; 
+	walkLeft[ 8 ].w = 89; 
+	walkLeft[ 8 ].h = 200;
 
 	
 }
@@ -238,253 +233,233 @@ void Lebron::clipWalk(){
 //Clip the sprites for the character to punch, facing either right or left
 void Lebron::clipPunch(){
 	punchRight[ 0 ].x = 0; 
-	punchRight[ 0 ].y = 1127; 
-	punchRight[ 0 ].w = 81; 
-	punchRight[ 0 ].h = 206;
+	punchRight[ 0 ].y = 1103; 
+	punchRight[ 0 ].w = 68; 
+	punchRight[ 0 ].h = 194;
 
-	punchRight[ 1 ].x = 81; 
-	punchRight[ 1 ].y = 1127; 
-	punchRight[ 1 ].w = 104; 
-	punchRight[ 1 ].h = 206;
+	punchRight[ 1 ].x = 68; 
+	punchRight[ 1 ].y = 1103; 
+	punchRight[ 1 ].w = 88; 
+	punchRight[ 1 ].h = 194;
 
-	punchRight[ 2 ].x = 185; 
-	punchRight[ 2 ].y = 1127; 
-	punchRight[ 2 ].w = 142; 
-	punchRight[ 2 ].h = 206;
+	punchRight[ 2 ].x = 156; 
+	punchRight[ 2 ].y = 1103; 
+	punchRight[ 2 ].w = 126; 
+	punchRight[ 2 ].h = 194;
 
-	punchRight[ 3 ].x = 327; 
-	punchRight[ 3 ].y = 1127; 
-	punchRight[ 3 ].w = 126; 
-	punchRight[ 3 ].h = 206;
+	punchRight[ 3 ].x = 282; 
+	punchRight[ 3 ].y = 1103; 
+	punchRight[ 3 ].w = 107; 
+	punchRight[ 3 ].h = 194;
 
-	punchRight[ 4 ].x = 453; 
-	punchRight[ 4 ].y = 1127; 
-	punchRight[ 4 ].w = 122; 
-	punchRight[ 4 ].h = 206;
+	punchRight[ 4 ].x = 389; 
+	punchRight[ 4 ].y = 1103; 
+	punchRight[ 4 ].w = 102; 
+	punchRight[ 4 ].h = 194;
 
 	punchLeft[ 0 ].x = 0; 
-	punchLeft[ 0 ].y = 4336; 
-	punchLeft[ 0 ].w = 81; 
-	punchLeft[ 0 ].h = 206;
+	punchLeft[ 0 ].y = 4141; 
+	punchLeft[ 0 ].w = 68; 
+	punchLeft[ 0 ].h = 194;
 
-	punchLeft[ 1 ].x = 81; 
-	punchLeft[ 1 ].y = 4336; 
-	punchLeft[ 1 ].w = 104; 
-	punchLeft[ 1 ].h = 206;
+	punchLeft[ 1 ].x = 68; 
+	punchLeft[ 1 ].y = 4141; 
+	punchLeft[ 1 ].w = 88; 
+	punchLeft[ 1 ].h = 194;
 
-	punchLeft[ 2 ].x = 185; 
-	punchLeft[ 2 ].y = 4336; 
-	punchLeft[ 2 ].w = 142; 
-	punchLeft[ 2 ].h = 206;
+	punchLeft[ 2 ].x = 156; 
+	punchLeft[ 2 ].y = 4141; 
+	punchLeft[ 2 ].w = 126; 
+	punchLeft[ 2 ].h = 194;
 
-	punchLeft[ 3 ].x = 327; 
-	punchLeft[ 3 ].y = 4336; 
-	punchLeft[ 3 ].w = 126; 
-	punchLeft[ 3 ].h = 206;
+	punchLeft[ 3 ].x = 282; 
+	punchLeft[ 3 ].y = 4141; 
+	punchLeft[ 3 ].w = 107; 
+	punchLeft[ 3 ].h = 194;
 
-	punchLeft[ 4 ].x = 453; 
-	punchLeft[ 4 ].y = 4336; 
-	punchLeft[ 4 ].w = 122; 
-	punchLeft[ 4 ].h = 206;
+	punchLeft[ 4 ].x = 389; 
+	punchLeft[ 4 ].y = 4141; 
+	punchLeft[ 4 ].w = 102; 
+	punchLeft[ 4 ].h = 194;
 }
 
 //Clip the sprites for the character to kick, facing either right or left
 void Lebron::clipKick(){
 	kickRight[ 0 ].x = 0; 
-	kickRight[ 0 ].y = 1850; 
-	kickRight[ 0 ].w = 88; 
-	kickRight[ 0 ].h = 210;	
+	kickRight[ 0 ].y = 1763; 
+	kickRight[ 0 ].w = 87; 
+	kickRight[ 0 ].h = 183;	
 
-	kickRight[ 1 ].x = 88; 
-	kickRight[ 1 ].y = 1850; 
-	kickRight[ 1 ].w = 97; 
-	kickRight[ 1 ].h = 210;	
+	kickRight[ 1 ].x = 87; 
+	kickRight[ 1 ].y = 1763; 
+	kickRight[ 1 ].w = 91; 
+	kickRight[ 1 ].h = 183;	
 
-	kickRight[ 2 ].x = 185; 
-	kickRight[ 2 ].y = 1850; 
-	kickRight[ 2 ].w = 83; 
-	kickRight[ 2 ].h = 210;	
+	kickRight[ 2 ].x = 178; 
+	kickRight[ 2 ].y = 1763; 
+	kickRight[ 2 ].w = 95; 
+	kickRight[ 2 ].h = 183;	
 
-	kickRight[ 3 ].x = 268; 
-	kickRight[ 3 ].y = 1850; 
-	kickRight[ 3 ].w = 107; 
-	kickRight[ 3 ].h = 210;	
+	kickRight[ 3 ].x = 273; 
+	kickRight[ 3 ].y = 1763; 
+	kickRight[ 3 ].w = 103; 
+	kickRight[ 3 ].h = 183;	
 
-	kickRight[ 4 ].x = 375; 
-	kickRight[ 4 ].y = 1850; 
-	kickRight[ 4 ].w = 153; 
-	kickRight[ 4 ].h = 210;	
+	kickRight[ 4 ].x = 376; 
+	kickRight[ 4 ].y = 1763; 
+	kickRight[ 4 ].w = 127; 
+	kickRight[ 4 ].h = 183;	
 
-	kickRight[ 5 ].x = 528; 
-	kickRight[ 5 ].y = 1850; 
-	kickRight[ 5 ].w = 133; 
-	kickRight[ 5 ].h = 210;	
+	kickRight[ 5 ].x = 503; 
+	kickRight[ 5 ].y = 1763; 
+	kickRight[ 5 ].w = 93; 
+	kickRight[ 5 ].h = 183;	
 
-	kickRight[ 6 ].x = 661; 
-	kickRight[ 6 ].y = 1850; 
-	kickRight[ 6 ].w = 76; 
-	kickRight[ 6 ].h = 210;	
+	kickRight[ 6 ].x = 596; 
+	kickRight[ 6 ].y = 1763; 
+	kickRight[ 6 ].w = 61; 
+	kickRight[ 6 ].h = 183;	
 
-	kickRight[ 7 ].x = 737; 
-	kickRight[ 7 ].y = 1850; 
-	kickRight[ 7 ].w = 103; 
-	kickRight[ 7 ].h = 210;	
+	kickRight[ 7 ].x = 657; 
+	kickRight[ 7 ].y = 1763; 
+	kickRight[ 7 ].w = 74; 
+	kickRight[ 7 ].h = 183;	
 
 	kickLeft[ 0 ].x = 0; 
-	kickLeft[ 0 ].y = 5059; 
-	kickLeft[ 0 ].w = 88; 
-	kickLeft[ 0 ].h = 210;	
+	kickLeft[ 0 ].y = 4801; 
+	kickLeft[ 0 ].w = 87; 
+	kickLeft[ 0 ].h = 183;	
 
-	kickLeft[ 1 ].x = 88; 
-	kickLeft[ 1 ].y = 5059; 
-	kickLeft[ 1 ].w = 97; 
-	kickLeft[ 1 ].h = 210;	
+	kickLeft[ 1 ].x = 87; 
+	kickLeft[ 1 ].y = 4801; 
+	kickLeft[ 1 ].w = 91; 
+	kickLeft[ 1 ].h = 183;	
 
-	kickLeft[ 2 ].x = 185; 
-	kickLeft[ 2 ].y = 5059; 
-	kickLeft[ 2 ].w = 83; 
-	kickLeft[ 2 ].h = 210;	
+	kickLeft[ 2 ].x = 178; 
+	kickLeft[ 2 ].y = 4801; 
+	kickLeft[ 2 ].w = 95; 
+	kickLeft[ 2 ].h = 183;	
 
-	kickLeft[ 3 ].x = 268; 
-	kickLeft[ 3 ].y = 5059; 
-	kickLeft[ 3 ].w = 107; 
-	kickLeft[ 3 ].h = 210;	
+	kickLeft[ 3 ].x = 273; 
+	kickLeft[ 3 ].y = 4801; 
+	kickLeft[ 3 ].w = 103; 
+	kickLeft[ 3 ].h = 183;	
 
-	kickLeft[ 4 ].x = 375; 
-	kickLeft[ 4 ].y = 5059; 
-	kickLeft[ 4 ].w = 153; 
-	kickLeft[ 4 ].h = 210;	
+	kickLeft[ 4 ].x = 376; 
+	kickLeft[ 4 ].y = 4801; 
+	kickLeft[ 4 ].w = 127; 
+	kickLeft[ 4 ].h = 183;	
 
-	kickLeft[ 5 ].x = 528; 
-	kickLeft[ 5 ].y = 5059; 
-	kickLeft[ 5 ].w = 133; 
-	kickLeft[ 5 ].h = 210;	
+	kickLeft[ 5 ].x = 503; 
+	kickLeft[ 5 ].y = 4801; 
+	kickLeft[ 5 ].w = 93; 
+	kickLeft[ 5 ].h = 183;	
 
-	kickLeft[ 6 ].x = 661; 
-	kickLeft[ 6 ].y = 5059; 
-	kickLeft[ 6 ].w = 76; 
-	kickLeft[ 6 ].h = 210;	
+	kickLeft[ 6 ].x = 596; 
+	kickLeft[ 6 ].y = 4801; 
+	kickLeft[ 6 ].w = 61; 
+	kickLeft[ 6 ].h = 183;	
 
-	kickLeft[ 7 ].x = 737; 
-	kickLeft[ 7 ].y = 5059; 
-	kickLeft[ 7 ].w = 103; 
-	kickLeft[ 7 ].h = 210;
+	kickLeft[ 7 ].x = 657; 
+	kickLeft[ 7 ].y = 4801; 
+	kickLeft[ 7 ].w = 74; 
+	kickLeft[ 7 ].h = 183;	
 }
 
 //Clip the sprites for the character to block, facing either right or left
 void Lebron::clipBlock(){
 	blockRight[ 0 ].x = 0; 
-	blockRight[ 0 ].y = 2691; 
-	blockRight[ 0 ].w = 76; 
-	blockRight[ 0 ].h = 195;
+	blockRight[ 0 ].y = 2550; 
+	blockRight[ 0 ].w = 73; 
+	blockRight[ 0 ].h = 179;
 
-	blockRight[ 1 ].x = 76; 
-	blockRight[ 1 ].y = 2691; 
-	blockRight[ 1 ].w = 74; 
-	blockRight[ 1 ].h = 195;
+	blockRight[ 1 ].x = 73; 
+	blockRight[ 1 ].y = 2550; 
+	blockRight[ 1 ].w = 72; 
+	blockRight[ 1 ].h = 179;
 
-	blockRight[ 2 ].x = 150; 
-	blockRight[ 2 ].y = 2691; 
-	blockRight[ 2 ].w = 86; 
-	blockRight[ 2 ].h = 195;
+	blockRight[ 2 ].x = 145; 
+	blockRight[ 2 ].y = 2550; 
+	blockRight[ 2 ].w = 69; 
+	blockRight[ 2 ].h = 179;
 
 	blockLeft[ 0 ].x = 0; 
-	blockLeft[ 0 ].y = 5900; 
-	blockLeft[ 0 ].w = 76; 
-	blockLeft[ 0 ].h = 195;
+	blockLeft[ 0 ].y = 5588; 
+	blockLeft[ 0 ].w = 73; 
+	blockLeft[ 0 ].h = 179;
 
-	blockLeft[ 1 ].x = 76; 
-	blockLeft[ 1 ].y = 5900; 
-	blockLeft[ 1 ].w = 74; 
-	blockLeft[ 1 ].h = 195;
+	blockLeft[ 1 ].x = 73; 
+	blockLeft[ 1 ].y = 5588; 
+	blockLeft[ 1 ].w = 72; 
+	blockLeft[ 1 ].h = 179;
 
-	blockLeft[ 2 ].x = 150; 
-	blockLeft[ 2 ].y = 5900; 
-	blockLeft[ 2 ].w = 86; 
-	blockLeft[ 2 ].h = 195;
+	blockLeft[ 2 ].x = 145; 
+	blockLeft[ 2 ].y = 5588; 
+	blockLeft[ 2 ].w = 69; 
+	blockLeft[ 2 ].h = 179;
 }
 
 //Clip the sprites for the character to die, facing either right or left
 void Lebron::clipDeath(){
 	deadRight[ 0 ].x = 0; 
-	deadRight[ 0 ].y = 3028; 
-	deadRight[ 0 ].w = 46; 
-	deadRight[ 0 ].h = 181;
+	deadRight[ 0 ].y = 2866; 
+	deadRight[ 0 ].w = 39; 
+	deadRight[ 0 ].h = 187;
 
-	deadRight[ 1 ].x = 46; 
-	deadRight[ 1 ].y = 3028; 
-	deadRight[ 1 ].w = 43; 
-	deadRight[ 1 ].h = 181;
+	deadRight[ 1 ].x = 39; 
+	deadRight[ 1 ].y = 2866; 
+	deadRight[ 1 ].w = 69; 
+	deadRight[ 1 ].h = 187;
 
-	deadRight[ 2 ].x = 89; 
-	deadRight[ 2 ].y = 3028; 
-	deadRight[ 2 ].w = 59; 
-	deadRight[ 2 ].h = 181;
+	deadRight[ 2 ].x = 108; 
+	deadRight[ 2 ].y = 2866; 
+	deadRight[ 2 ].w = 40; 
+	deadRight[ 2 ].h = 187;
 
 	deadRight[ 3 ].x = 148; 
-	deadRight[ 3 ].y = 3028; 
-	deadRight[ 3 ].w = 92; 
-	deadRight[ 3 ].h = 181;
+	deadRight[ 3 ].y = 2866; 
+	deadRight[ 3 ].w = 66; 
+	deadRight[ 3 ].h = 187;
 
-	deadRight[ 4 ].x = 240; 
-	deadRight[ 4 ].y = 3028; 
+	deadRight[ 4 ].x = 214; 
+	deadRight[ 4 ].y = 2866; 
 	deadRight[ 4 ].w = 136; 
-	deadRight[ 4 ].h = 181;
+	deadRight[ 4 ].h = 187;
 
-	deadRight[ 5 ].x = 376; 
-	deadRight[ 5 ].y = 3028; 
-	deadRight[ 5 ].w = 164; 
-	deadRight[ 5 ].h = 181;
-
-	deadRight[ 6 ].x = 540; 
-	deadRight[ 6 ].y = 3028; 
-	deadRight[ 6 ].w = 171; 
-	deadRight[ 6 ].h = 181;
-
-	deadRight[ 7 ].x = 711; 
-	deadRight[ 7 ].y = 3028; 
-	deadRight[ 7 ].w = 180; 
-	deadRight[ 7 ].h = 181;
+	deadRight[ 5 ].x = 350; 
+	deadRight[ 5 ].y = 2866; 
+	deadRight[ 5 ].w = 169; 
+	deadRight[ 5 ].h = 187;
 
 	deadLeft[ 0 ].x = 0; 
-	deadLeft[ 0 ].y = 6237; 
-	deadLeft[ 0 ].w = 46; 
-	deadLeft[ 0 ].h = 181;
+	deadLeft[ 0 ].y = 5904; 
+	deadLeft[ 0 ].w = 39; 
+	deadLeft[ 0 ].h = 187;
 
-	deadLeft[ 1 ].x = 46; 
-	deadLeft[ 1 ].y = 6237; 
-	deadLeft[ 1 ].w = 43; 
-	deadLeft[ 1 ].h = 181;
+	deadLeft[ 1 ].x = 39; 
+	deadLeft[ 1 ].y = 5904; 
+	deadLeft[ 1 ].w = 69; 
+	deadLeft[ 1 ].h = 187;
 
-	deadLeft[ 2 ].x = 89; 
-	deadLeft[ 2 ].y = 6237; 
-	deadLeft[ 2 ].w = 59; 
-	deadLeft[ 2 ].h = 181;
+	deadLeft[ 2 ].x = 108; 
+	deadLeft[ 2 ].y = 5904; 
+	deadLeft[ 2 ].w = 40; 
+	deadLeft[ 2 ].h = 187;
 
 	deadLeft[ 3 ].x = 148; 
-	deadLeft[ 3 ].y = 6237; 
-	deadLeft[ 3 ].w = 92; 
-	deadLeft[ 3 ].h = 181;
+	deadLeft[ 3 ].y = 5904; 
+	deadLeft[ 3 ].w = 66; 
+	deadLeft[ 3 ].h = 187;
 
-	deadLeft[ 4 ].x = 240; 
-	deadLeft[ 4 ].y = 6237; 
+	deadLeft[ 4 ].x = 214; 
+	deadLeft[ 4 ].y = 5904; 
 	deadLeft[ 4 ].w = 136; 
-	deadLeft[ 4 ].h = 181;
+	deadLeft[ 4 ].h = 187;
 
-	deadLeft[ 5 ].x = 376; 
-	deadLeft[ 5 ].y = 6237; 
-	deadLeft[ 5 ].w = 164; 
-	deadLeft[ 5 ].h = 181;
-
-	deadLeft[ 6 ].x = 540; 
-	deadLeft[ 6 ].y = 6237; 
-	deadLeft[ 6 ].w = 171; 
-	deadLeft[ 6 ].h = 181;
-
-	deadLeft[ 7 ].x = 711; 
-	deadLeft[ 7 ].y = 6237; 
-	deadLeft[ 7 ].w = 180; 
-	deadLeft[ 7 ].h = 181;
+	deadLeft[ 5 ].x = 350; 
+	deadLeft[ 5 ].y = 5904; 
+	deadLeft[ 5 ].w = 169; 
+	deadLeft[ 5 ].h = 187;
 }
 
 //Display the dot
@@ -528,7 +503,7 @@ void Lebron::show(SDL_Surface* destination){
 		}
 	
 		//If standing and sprite frames are done, reset frame to 0 to loop animation
-		if(status == 0 && frame >= 10){
+		if(status == 0 && frame >= 9){
 			frame = 0;
 		}
 	
