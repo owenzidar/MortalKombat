@@ -14,7 +14,7 @@ using namespace std;
 
 class Conan : public Character{
 	public:
-		Conan(int, int, int);
+		Conan(int = 400, int = 600, int = 1);
 		virtual void clipStand(); //Clip the sprite sheet for the character to stand
 		virtual void clipWalk(); //Clip the sprite sheet for the character to walk
 		virtual void clipPunch(); //Clip the sprite sheet for the character to punch
@@ -38,9 +38,7 @@ class Conan : public Character{
 		SDL_Rect deadLeft[8]; //Sprite clippings for dying facing left
 };
 
-Conan::Conan(int xcoord, int ycoord, int walk) : Character(xcoord, ycoord, walk){
-	image = load_image("Conan.png"); //Load image of the dot
-}
+Conan::Conan(int xcoord, int ycoord, int walk) : Character(xcoord, ycoord, walk){}
 
 //Clip the sprites for the character to stand, facing either right or left
 void Conan::clipStand(){
