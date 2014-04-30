@@ -1,10 +1,8 @@
 /*
-Kevin Epp  CSE 20212
-Lab9  blob.h
-This program contains the functions that are used in main.cpp, the Blob class
-definition, and the Blob class implementation.
-It displays a dot on an SDL screen and performs various functions so that
-Mortal Kombat can be implemented using this class and functions
+Kevin Epp, Mitch Patin, Owen Zidar  CSE 20212
+Final Project Character.h
+This program is the header and implementation for the base class, Character,
+which several derived classes inherit from
 */
 
 #include <iostream>
@@ -18,10 +16,13 @@ Mortal Kombat can be implemented using this class and functions
 
 using namespace std;
 
-//BLOB CLASS DEFINITION
+//CHARACTER CLASS DEFINITION
 
 #ifndef CHARACTER_H
 #define CHARACTER_H
+
+//Character is a pure virtual class, meaning it cannot be instantiated
+//show() is the pure virtual function
 
 class Character{
 	public:
@@ -30,7 +31,7 @@ class Character{
 		void input2(Character*); //Make the desired move according to key pressed (Character 2)
 		void move1(Character*); //Move the character
 		void move2(Character*); //Move the character	
-		virtual void show(SDL_Surface*) = 0; //Show the character on desired surface
+		virtual void show(SDL_Surface*) = 0; //Show the character on desired surface, pure virtual function
 		void free(); //Free the character's space in memory
 		void show_health(int, int); //Display the current character's health bar using FillRect
 		void punch(Character*); //Punch the opposing character, if close enough
@@ -44,7 +45,10 @@ class Character{
 		virtual void clipDeath(); //Clip the sprite sheet for the character to die
 		void setStatus(int); //Set the status of the character
 		void setFrame(int); //Set the current frame for animation
-		void setImage(string);
+		void setImage(string); //Set the sprite image for the character
+		void setWinImage(string); //Set the image used on the win screen for the character
+		SDL_Surface* getWinImage(); //Get the image used on the win screen for the character
+		int wins(int); //Display win screen
 
 	protected:
 		int x; //x-coordinate
@@ -54,6 +58,7 @@ class Character{
 		int health; //Current health remaining of the character (out of 100)
 		int block; //If the user is attempting to block
 		SDL_Surface *image; //Image of the character
+		SDL_Surface *winImage; //Image of the character
 		int change; //If there is a change in action; this will trigger a reset of frame to 0
 		int status; //Current status of the character, tells the program what set of sprites to animate
 		int frame; //Current frame for animation, number of frames varies by action
@@ -67,7 +72,7 @@ class Character{
 		int pressed5; //If the character is blocking
 };
 
-//BLOB CLASS IMPLEMENTATION
+//CHARACTER CLASS IMPLEMENTATION
 
 //Initialize dot
 Character::Character(int xcoord, int ycoord, int walk){
@@ -360,10 +365,52 @@ int Character::isDone(){
 	return 0; //Otherwise, game is not over
 }
 
+//Set the character's sprite sheet
 void Character::setImage(string filename){
 	image = load_image(filename);
 }
 
+//Set the image used on the win screen for the character
+void Character::setWinImage(string filename){
+	winImage = load_image(filename);
+}
+
+//Get the image used on the win screen for the character
+SDL_Surface* Character::getWinImage(){
+	return winImage;
+}
+
+//Display the winner screen
+int Character::wins(int winner){
+	bool quit = false; //User hasn't quit
+
+	if(winner == 1){ //If Player 1 won
+		winBackground = load_image("Player 1 Wins.bmp"); //Load "Player 1 Wins" image as background
+	}else if(winner == 2){ //If Player 2 won
+		winBackground = load_image("Player 2 Wins.bmp"); //Load "Player 2 Wins" image as background
+	}else{
+		return 0; //quit
+	}
+
+	init(); //Initialize SDL screen
+	
+	while(quit == false){ //While user hasn't quit
+		apply_surface(0, 0, winBackground, screen); //Apply winBackground
+		apply_surface(450, 550, winImage, screen); //Apply Character winImage to background to show character's face
+		while(SDL_PollEvent(&event)){ //While there is an event happening
+			if(event.type == SDL_QUIT){ //If user exited window
+				quit = true; //Quit
+			}
+		}
+
+		if(SDL_Flip(screen) == -1){ //If screen cannot be updated
+			return 0; //Quit
+		}
+	}
+	return 1;
+}
+
+//These functions are all implemented in each character's class as virtual functions
 void Character::show(SDL_Surface*){}
 void Character::clipStand(){}
 void Character::clipWalk(){}
