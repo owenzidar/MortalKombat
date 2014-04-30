@@ -1,3 +1,9 @@
+/*
+Kevin Epp, Mitch Patin, Owen Zidar  CSE 20212
+Final Project  LadyGaga.h
+Derived class for LadyGaga object, inherits from Character.h
+*/
+
 #include <iostream>
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
@@ -14,7 +20,7 @@ using namespace std;
 
 class LadyGaga : public Character{
 	public:
-		LadyGaga(int = 400, int = 600, int = 1);
+		LadyGaga(int = 400, int = 600, int = 1); //Constructor
 		virtual void clipStand(); //Clip the sprite sheet for the character to stand
 		virtual void clipWalk(); //Clip the sprite sheet for the character to walk
 		virtual void clipPunch(); //Clip the sprite sheet for the character to punch
@@ -38,6 +44,7 @@ class LadyGaga : public Character{
 		SDL_Rect deadLeft[6]; //Sprite clippings for dying facing left
 };
 
+//Constructor, uses member initialization syntax to access Character constructor
 LadyGaga::LadyGaga(int xcoord, int ycoord, int walk) : Character(xcoord, ycoord, walk){}
 
 //Clip the sprites for the character to stand, facing either right or left
