@@ -1,10 +1,11 @@
 /*
-Kevin Epp  CSE 20212
-Lab 10  main.cpp
-Main function that implements two instances of Charles Barkley as characters and plays a mock Mortal Kombat game
+Kevin Epp, Mitch Patin, Owen Zidar  CSE 20212
+Final Project  main.cpp
+Main function that implements and plays a mock Mortal Kombat game
 The two characters can move independently and punch and kick each other to deplete health, as well as block attacks
 */
 
+//Libraries, including appropriate SDL libraries
 #include <iostream>
 #include "SDL/SDL.h"
 #include "SDL/SDL_ttf.h"
@@ -12,6 +13,7 @@ The two characters can move independently and punch and kick each other to deple
 #include <string>
 #include <sstream>
 
+//Include Timer class, Character base class, and all classes inheriting from Character
 #include "Timer.h"
 #include "Character.h"
 #include "CharlesBarkley.h"
@@ -21,35 +23,37 @@ The two characters can move independently and punch and kick each other to deple
 #include "LadyGaga.h"
 #include "Miley.h"
 
+//Include Menu class
 #include "Menu.h"
 
 using namespace std;
 
 int main(int argc, char* args[]){
-	int choice ,choice1, choice2; //Which background the user chooses to play on
+	int choice; //Which background the users choose to play on
+	int choice1, choice2; //Which player each user chooses to play as
 	string backChoice; //String that contains the image location of the desired background
 	bool quit = false; //Checks if user quit
 	int count = 0; //Used to display the animation of the character dying
-	int* a;
+	int winner = 0; //1 if player 1 wins, 2 if player 2 wins
+	int Wins; //If a player has won (i.e. game is not quit), free the screen displaying winner
+	int* a; //Pointer to an array of ints, used to obtain level and character choices from Menu object
 
-	string Player1Wins = "Player 1 Wins.bmp";
-
-	Menu test;
-	a = test.go();
-	choice = a[0];
-	choice1 = a[1];
-	choice2 = a[2];
+	Menu test; //Instantiate Menu object
+	a = test.go(); //Display Menu to get user input, 3 numbers are outputted to a
+	choice = a[0]; //Background choice (0-2)
+	choice1 = a[1]; //Player 1 Character choice (0-5)
+	choice2 = a[2]; //Player 2 Character choice (0-5)
 
 	//Assign appropriate image location to backChoice depending on user input
 	switch(choice){
-		case 2: //Mortal Kombat background
-			backChoice = "images.bmp"; 
+		case 0: //Golden Dome background
+			backChoice = "dome.bmp";
 			break;
 		case 1: //Notre Dame Stadium background
 			backChoice = "stadium.bmp";
 			break;
-		case 0: //Golden Dome background
-			backChoice = "dome.bmp";
+		case 2: //Mortal Kombat background
+			backChoice = "images.bmp"; 
 			break;
 		default: //Invalid input assumes Mortal Kombat background
 			cout << "Wrong input. Assuming you want to play on MK ground." << endl;
@@ -58,33 +62,40 @@ int main(int argc, char* args[]){
 			break;
 	}
 
-	Character *myDot1;
-	Character *myDot2;
+	Character *myDot1; //Base class pointer for Player 1
+	Character *myDot2; //Base class pointer for Player 2
 
+	//Assign appropriate character to Player 1 based on user input
 	switch(choice1){
-		case 0:
+		case 0: //Instantiate Charles Barkley
 			myDot1 = new CharlesBarkley(400,600,1);
-			myDot1->setImage("CharlesBarkley.png");
+			myDot1->setImage("CharlesBarkley.png"); //Sprite sheet
+			myDot1->setWinImage("images/charles.png"); //Image to use if character wins
 			break;
-		case 2:
+		case 1: //Instantiate Lebron James
+			myDot1 = new Lebron(400,600,1);
+			myDot1->setImage("LebronJames.png"); 
+			myDot1->setWinImage("images/lebron.png");
+			break;
+		case 2: //Instantiate Conan O'Brien
 			myDot1 = new Conan(400,600,1);
 			myDot1->setImage("Conan.png");
+			myDot1->setWinImage("images/conan.png");
 			break;
-		case 1:
-			myDot1 = new Lebron(400,600,1);
-			myDot1->setImage("LebronJames.png");
-			break;
-		case 4:
-			myDot1 = new Leprechaun(400,600,1);
-			myDot1->setImage("Leprechaun.png");
-			break;
-		case 3:
+		case 3: //Instantiate Lady Gaga
 			myDot1 = new LadyGaga(400,600,1);
 			myDot1->setImage("LadyGaga.png");
+			myDot1->setWinImage("images/gaga.png");
 			break;
-		case 5:
+		case 4: //Instantiate the ND Leprechaun
+			myDot1 = new Leprechaun(400,600,1);
+			myDot1->setImage("Leprechaun.png");
+			myDot1->setWinImage("images/leprechaun.png");
+			break;
+		case 5: //Instantiate Miley Cyrus
 			myDot1 = new Miley(400,600,1);
 			myDot1->setImage("MileyCyrus.png");
+			myDot1->setWinImage("images/miley.png");
 			break;
 		default:
 			cout << "Invalid input. Quitting." << endl;
@@ -92,30 +103,37 @@ int main(int argc, char* args[]){
 			break; 
 	}
 
+	//Assign appropriate character to Player 2 based on user input
 	switch(choice2){
-		case 0:
+		case 0: //Instantiate Charles Barkley
 			myDot2 = new CharlesBarkley(800, 600, 0);
-			myDot2->setImage("CharlesBarkley.png");
+			myDot2->setImage("CharlesBarkley.png"); //Sprite sheet
+			myDot2->setWinImage("images/charles.png"); //Image to use if character wins
 			break;
-		case 2:
-			myDot2 = new Conan(800, 600, 0);
-			myDot2->setImage("Conan.png");
-			break;
-		case 1:
+		case 1: //Instantiate Lebron James
 			myDot2 = new Lebron(800, 600, 0);
 			myDot2->setImage("LebronJames.png");
+			myDot2->setWinImage("images/lebron.png");
 			break;
-		case 4:
-			myDot2 = new Leprechaun(800, 600, 0);
-			myDot2->setImage("Leprechaun.png");
+		case 2: //Instantiate Conan O'Brien
+			myDot2 = new Conan(800, 600, 0);
+			myDot2->setImage("Conan.png");
+			myDot2->setWinImage("images/conan.png");
 			break;
-		case 3:
+		case 3: //Instantiate Lady Gaga
 			myDot2 = new LadyGaga(800, 600, 0);
 			myDot2->setImage("LadyGaga.png");
+			myDot2->setWinImage("images/gaga.png");
 			break;
-		case 5:
+		case 4: //Instantiate the ND Leprechaun
+			myDot2 = new Leprechaun(800, 600, 0);
+			myDot2->setImage("Leprechaun.png");
+			myDot2->setWinImage("images/leprechaun.png");
+			break;
+		case 5: //Instantiate Miley Cyrus
 			myDot2 = new Miley(800, 600, 0);
 			myDot2->setImage("MileyCyrus.png");
+			myDot2->setWinImage("images/miley.png");
 			break;
 		default:
 			cout << "Invalid input. Quitting." << endl;
@@ -123,17 +141,12 @@ int main(int argc, char* args[]){
 			break;
 	}
 
-cout << "Working!" << endl;
-
 	//If SDL couldn't intialize, quit
 	if(init() == false){
 		return 1;
 	}
 
-	Timer fps; //Instantiate a timer to help slow down movements of characters for easier gameplay
-
-	//CharlesBarkley myDot1(400,600, 1); //Initialize character 1
-	//Miley myDot2(800,600, 0); //Inititalize character 2	
+	Timer fps; //Instantiate a timer to help slow down movements of characters for easier gameplay	
 
 	//Clip the sprite sheet for each character standing
 	myDot1->clipStand();
@@ -197,8 +210,7 @@ cout << "Working!" << endl;
 			if(count >= 7){
 				quit = true; //Exit while loop next time through
 				sleep(1);
-				background = load_image(Player1Wins);
-				cout << "Player 2 wins!!!" << endl; //Display Character 2 winning message
+				winner = 2; //Player 2 is winner
 			}
 		}
 
@@ -214,11 +226,10 @@ cout << "Working!" << endl;
 			count++; //Increase count
 
 			//If count >= 7 (7 is number of sprite images needed to animate character dying), exit game
-			if(count >= 7){
+			if(count >= 7 && count != 10){
 				quit = true; //Exit while loop next time through
 				sleep(1);
-				winBackground = load_image(Player1Wins);
-				cout << "Player 1 wins!!!" << endl; //Display Character 1 winning message
+				winner = 1; //Player 1 is winner
 			}
 		}
 
@@ -227,45 +238,19 @@ cout << "Working!" << endl;
             		SDL_Delay( ( 1000 / fps.getFRAMES_PER_SECOND() ) - fps.get_ticks() );
         	}	
 	}
-		
-	
 
-	//SDL_Quit(); //Free screen and quit SDL
+	SDL_Quit(); //Free screen and quit SDL
 
-	quit = false;
-
-//myDot1->free(); //Free character 1
-	//myDot2->free(); //Free character 2
-
-	//SDL_FreeSurface(background); //Free the background
-/*
-	while(quit == false){
-		//if(init() == false){
-		//	return 1;
-		//}
-
-		
-		//if(i == 0){
-			//winBackground = load_image(backChoice);
-			//cout << "Worked!" << endl;
-			apply_surface(0,0,winBackground,screen); //Display background on the screen
-			//cout << "Worked!" << endl;
-			//i = 1;
-		//}
-
-		while(SDL_PollEvent(&event)){ //While there is an event happening
-			if(event.type == SDL_QUIT){ //If user exited window
-				SDL_FreeSurface(winBackground); //Free the background
-				quit = true; //Quit
-			}
-		}
+	if(winner == 1){ //If Player 1 won
+		Wins = myDot1->wins(winner); //Display win screen for Player 1 (Wins now equals 1)
+	}else if (winner == 2){ //If Player 2 won
+		Wins = myDot2->wins(winner); //Display win screen for Player 2 (Wins now equals 1)
 	}
-*/
+	if(Wins == 1) //If Wins = 1
+		SDL_Quit(); //Free screen and quit SDL
 
 	myDot1->free(); //Free character 1
 	myDot2->free(); //Free character 2
-
-	SDL_Quit(); //Free screen and quit SDL
 	
 	return 0;
 }
