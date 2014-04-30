@@ -1,3 +1,9 @@
+/*
+Kevin Epp, Mitch Patin, Owen Zidar  CSE 20212
+Final Project  Timer.h
+Contains global functions and variables, as well as Timer class to control tempo of game
+*/
+
 #include <iostream>
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
@@ -17,8 +23,9 @@ const int screen_height = 849;
 const int screen_width = 1200;
 const int screen_bpp = 32;
 
-SDL_Surface *background; //Background image, a Mortal Kombat landscape
-SDL_Surface *winBackground;
+SDL_Surface *background; //Background image
+SDL_Surface *winBackground; //Background image for the winner screen
+SDL_Surface *winnerImage; //Image of the winning character
 SDL_Surface *screen; //The blank screen
 
 SDL_Event event; //Used to check what events happen at the keyboard
@@ -67,7 +74,7 @@ bool init(){
 		return false;
 	}
 
-	SDL_WM_SetCaption("Mortal Kombat", NULL); //Set screen's title
+	SDL_WM_SetCaption("Mortal Kombat - Celebrity", NULL); //Set screen's title
 
 	return true;
 }
