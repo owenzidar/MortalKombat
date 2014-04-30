@@ -10,4 +10,4 @@ Menu.o: Menu.cpp Menu.h
 	g++ -c Menu.cpp
 
 clean:
-	rm -f *.o main
+	rm -f core* *.o *~ main
